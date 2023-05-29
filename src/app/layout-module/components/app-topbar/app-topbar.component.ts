@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import {SettingsComponent} from "../settings/settings.component";
-import {LayoutService} from "../../../core/services/layout.service";
+import {LayoutService} from "../../services/layout.service";
 
 @Component({
   selector: 'app-topbar',

@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import {LayoutModule} from "./components/layout/layout.module";
 import {AppComponent} from "./components/app/app.component";
-import { MenuitemComponent } from './menuitem/menuitem.component';
+import {LayoutModule} from "./layout-module/layout.module";
 
 @NgModule({
-  declarations: [AppComponent, MenuitemComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     LayoutModule,
