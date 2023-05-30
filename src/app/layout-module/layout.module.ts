@@ -11,6 +11,7 @@ import {AppTopbarComponent} from "./components/app-topbar/app-topbar.component";
 import {SettingsComponent} from "./components/settings/settings.component";
 import {MenuitemComponent} from "./components/menuitem/menuitem.component";
 import {MenuComponent} from "./components/menu/menu.component";
+import {RippleModule} from "primeng/ripple";
 @NgModule({
   declarations: [
     AppLayoutComponent,
@@ -23,6 +24,7 @@ import {MenuComponent} from "./components/menu/menu.component";
     DynamicDialogModule,
     BrowserAnimationsModule,
     NgClass,
+    RippleModule,
   ],
   providers:[MenuService, LayoutService],
   exports: [

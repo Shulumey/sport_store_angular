@@ -22,6 +22,7 @@ export class MenuService {
         icon: PrimeIcons.CART_PLUS
       }];
 
+    console.log(this.menuModel);
     this.menuSource$ = defer(() => of(this.menuModel).pipe(concatAll()));
 
   }
