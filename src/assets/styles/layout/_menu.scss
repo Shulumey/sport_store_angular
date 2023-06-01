@@ -19,17 +19,38 @@
   padding: 0;
   list-style-type: none;
 
-  .layout-menuitem {
-    > .layout-menuitem-text {
-      font-size: .857rem;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--surface-900);
-      margin: .75rem 0;
+  a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    outline: 0 none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: .75rem 1rem;
+    border-radius: $borderRadius;
+    transition: background-color $transitionDuration, box-shadow $transitionDuration;
+
+    .layout-menuitem-icon {
+      margin-right: .5rem;
     }
 
-    > a {
-      display: none;
+    .layout-submenu-toggler {
+      font-size: 75%;
+      margin-left: auto;
+      transition: transform $transitionDuration;
+    }
+
+    &.active-menuitem {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    &:hover {
+      background-color: var(--surface-hover);
+    }
+
+    &:focus {
+      @include focused-inset();
     }
   }
 
@@ -37,14 +58,14 @@
     user-select: none;
 
     &.active-menuitem {
-      > .layout-submenu-toggler {
+      >.layout-submenu-toggler {
         transform: rotate(-180deg);
       }
     }
   }
 
   li.active-menuitem {
-    > a {
+    >a {
       .layout-submenu-toggler {
         transform: rotate(-180deg);
       }
@@ -77,7 +98,7 @@
         transition: transform $transitionDuration;
       }
 
-      &.active-route {
+      &.active-menuitem {
         font-weight: 700;
         color: var(--primary-color);
       }

@@ -6,7 +6,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
   selector: '[app-menuitem]',
   templateUrl: './menuitem.component.html',
   styleUrls: ['./menuitem.component.scss'],
-  animations:[
+  animations: [
     trigger('children', [
       state('collapsed', style({
         height: '0'
@@ -27,7 +27,7 @@ export class MenuitemComponent implements OnInit {
   @Input() parentKey!: string;
 
   key: string = "";
-  active = false;
+  active: boolean = false;
 
   constructor() {
     this.item = {
@@ -44,11 +44,19 @@ export class MenuitemComponent implements OnInit {
     return this.active;// && !this.item.children;
   }
 
-  itemClick(event: Event){
+  get submenuAnimation() {
+    return this.active ? 'expanded' : 'collapsed';
+  }
+
+  itemClick(event: Event) {
 
     if (this.item.isDisabled) {
       event.preventDefault();
       return;
+    }
+
+    if (this.item.children) {
+      this.active = !this.active;
     }
   }
 

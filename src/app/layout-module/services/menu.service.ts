@@ -10,6 +10,7 @@ export class MenuService {
 
   private menuModel: Menuitem[]
   public menuSource$: Observable<Menuitem>;
+
   constructor() {
 
     this.menuModel = [
@@ -18,12 +19,45 @@ export class MenuService {
         icon: PrimeIcons.ID_CARD
       },
       {
-        title: "Заказы КМ",
-        icon: PrimeIcons.CART_PLUS
-      }];
+        title: "Линии упаковывания",
+        icon: PrimeIcons.BOX
+      },
+      {
+        title: "Коды маркировки",
+        icon: PrimeIcons.CLOUD,
+        children: [
+          {
+            title: "Заказы на КМ",
+            icon: PrimeIcons.BRIEFCASE
+          },
+          {
+            title:"Реестр КМ",
+            icon: PrimeIcons.DATABASE,
+            children:[
+              {
+                title:"Полученные КМ",
+                icon: PrimeIcons.INBOX,
+              },
+              {
+                title:"Отпечатанные КМ",
+                icon: PrimeIcons.PRINT,
+              },
+              {
+                title:"Продукция с КМ",
+              }
+            ]
+          }
+        ]
+      }
+    ];
 
-    console.log(this.menuModel);
-    this.menuSource$ = defer(() => of(this.menuModel).pipe(concatAll()));
+    console
+      .log(this
+
+        .menuModel
+      );
+    this
+      .menuSource$ = defer(() => of(this.menuModel).pipe(concatAll()));
 
   }
 }

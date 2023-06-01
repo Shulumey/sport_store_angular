@@ -5,4 +5,9 @@
     <span class="layout-menuitem-text">{{item.title}}</span>
     <i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.children"></i>
   </a>
+  <ul *ngIf="item.children && item.isVisible !== false" [@children]="submenuAnimation">
+    <ng-template ngFor let-child let-i="index" [ngForOf]="item.children">
+      <li app-menuitem [item]="child" [index]="i" [parentKey]="key"></li>
+    </ng-template>
+  </ul>
 </ng-container>
