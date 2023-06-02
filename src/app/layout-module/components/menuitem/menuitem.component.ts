@@ -1,6 +1,9 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {Menuitem} from "../../models/menuitem";
 import {animate, state, style, transition, trigger} from "@angular/animations";
+import {MenuService} from "../../services/menu.service";
+import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: '[app-menuitem]',
@@ -18,7 +21,10 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
     ])
   ]
 })
-export class MenuitemComponent implements OnInit {
+export class MenuitemComponent implements OnInit, OnDestroy {
+
+  menuResetSub: Subscription;
+  menuStateChangedSub: Subscription;
 
   @Input() item: Menuitem;
 
@@ -26,10 +32,27 @@ export class MenuitemComponent implements OnInit {
 
   @Input() parentKey!: string;
 
+  @Input() root!: boolean;
+
   key: string = "";
   active: boolean = false;
 
-  constructor() {
+  constructor(public router: Router, private menuService: MenuService) {
+
+    this.menuStateChangedSub = this.menuService.menuStateChanged$.subscribe(value => {
+      if (value.routeEvent) {
+        this.active = (value.key === this.key || value.key.startsWith(this.key + '-')) ? true : false;
+      } else {
+        if (value.key !== this.key && !value.key.startsWith(this.key + '-')) {
+          this.active = false;
+        }
+      }
+    })
+
+    this.menuResetSub = this.menuService.resetSource$.subscribe(() => {
+      this.active = false;
+    })
+
     this.item = {
       title: ""
     };
@@ -41,11 +64,19 @@ export class MenuitemComponent implements OnInit {
 
   @HostBinding('class.active-menuitem')
   get activeClass() {
-    return this.active;// && !this.item.children;
+    return this.active;
   }
 
   get submenuAnimation() {
-    return this.active ? 'expanded' : 'collapsed';
+    return this.root ? 'expanded' : (this.active ? 'expanded' : 'collapsed');
+  }
+
+ async updateActiveStateFromRoute() {
+    let activeRoute = await this.router.navigate(this.item.routerLink ? [], { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' });
+
+    if (activeRoute) {
+      this.menuService.onMenuStateChange({ key: this.key, routeEvent: true });
+    }
   }
 
   itemClick(event: Event) {
@@ -55,9 +86,21 @@ export class MenuitemComponent implements OnInit {
       return;
     }
 
-    if (this.item.children) {
-      this.active = !this.active;
+    this.active = !this.item.children;
+
+    this.menuService.onMenuStateChanged({key: this.key});
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.menuResetSub) {
+      this.menuResetSub.unsubscribe();
     }
+
+    if (this.menuStateChangedSub) {
+      this.menuStateChangedSub.unsubscribe();
+    }
+
   }
 
 }

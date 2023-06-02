@@ -40,32 +40,32 @@
       transition: transform $transitionDuration;
     }
 
-    &.active-menuitem {
-      font-weight: 700;
-      color: var(--primary-color);
-    }
 
     &:hover {
       background-color: var(--surface-hover);
     }
 
-    &:focus {
-      @include focused-inset();
-    }
+    /*    &:focus {
+          @include focused-inset();
+        }*/
   }
 
   a {
     user-select: none;
 
     &.active-menuitem {
-      >.layout-submenu-toggler {
+      > .layout-submenu-toggler {
         transform: rotate(-180deg);
       }
     }
   }
 
   li.active-menuitem {
-    >a {
+
+    > a {
+      color: var(--primary-color);
+      @include focused-inset();
+
       .layout-submenu-toggler {
         transform: rotate(-180deg);
       }
@@ -77,74 +77,34 @@
     padding: 0;
     list-style-type: none;
 
-    a {
-      display: flex;
-      align-items: center;
-      position: relative;
-      outline: 0 none;
-      color: var(--text-color);
-      cursor: pointer;
-      padding: .75rem 1rem;
-      border-radius: $borderRadius;
-      transition: background-color $transitionDuration, box-shadow $transitionDuration;
-
-      .layout-menuitem-icon {
-        margin-right: .5rem;
+    li {
+      a {
+        margin-left: 1rem;
       }
-
-      .layout-submenu-toggler {
-        font-size: 75%;
-        margin-left: auto;
-        transition: transform $transitionDuration;
-      }
-
-      &.active-menuitem {
-        font-weight: 700;
-        color: var(--primary-color);
-      }
-
-      &:hover {
-        background-color: var(--surface-hover);
-      }
-
-      &:focus {
-        @include focused-inset();
-      }
-    }
-
-    ul {
-      overflow: hidden;
-      border-radius: $borderRadius;
 
       li {
         a {
-          margin-left: 1rem;
+          margin-left: 2rem;
         }
 
         li {
           a {
-            margin-left: 2rem;
+            margin-left: 2.5rem;
           }
 
           li {
             a {
-              margin-left: 2.5rem;
+              margin-left: 3rem;
             }
 
             li {
               a {
-                margin-left: 3rem;
+                margin-left: 3.5rem;
               }
 
               li {
                 a {
-                  margin-left: 3.5rem;
-                }
-
-                li {
-                  a {
-                    margin-left: 4rem;
-                  }
+                  margin-left: 4rem;
                 }
               }
             }
