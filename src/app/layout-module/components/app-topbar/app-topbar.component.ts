@@ -22,10 +22,10 @@ export class AppTopbarComponent implements OnInit {
 
   showSettings(){
     this.ref = this.dialogService.open(SettingsComponent, {
-      closable: true,
+      closable: false,
       modal: true,
+      width : "50%",
       header: "Настройки",
-
     })
   }
 

@@ -40,6 +40,11 @@
       transition: transform $transitionDuration;
     }
 
+    &.active-menuitem {
+      color: var(--primary-color);
+      @include focused-inset();
+    }
+
 
     &:hover {
       background-color: var(--surface-hover);
@@ -54,6 +59,9 @@
     user-select: none;
 
     &.active-menuitem {
+      color: var(--primary-color);
+      @include focused-inset();
+
       > .layout-submenu-toggler {
         transform: rotate(-180deg);
       }

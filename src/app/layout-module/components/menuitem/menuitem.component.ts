@@ -2,8 +2,8 @@ import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {Menuitem} from "../../models/menuitem";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MenuService} from "../../services/menu.service";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
+import {NavigationEnd, Router} from "@angular/router";
+import {filter, Subscription} from "rxjs";
 
 @Component({
   selector: '[app-menuitem]',
@@ -11,13 +11,19 @@ import {Subscription} from "rxjs";
   styleUrls: ['./menuitem.component.scss'],
   animations: [
     trigger('children', [
-      state('collapsed', style({
-        height: '0'
+      state('void', style({
+        height: '0px'
       })),
-      state('expanded', style({
+      state('hiddenAnimated', style({
+        height: '0px'
+      })),
+      state('visibleAnimated', style({
         height: '*'
       })),
-      transition('collapsed <=> expanded', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+      transition('visibleAnimated => hiddenAnimated', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
+      transition('hiddenAnimated => visibleAnimated', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)')),
+      transition('void => visibleAnimated, visibleAnimated => void',
+        animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
     ])
   ]
 })
@@ -53,8 +59,18 @@ export class MenuitemComponent implements OnInit, OnDestroy {
       this.active = false;
     })
 
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(params => {
+        if (this.item.routerLink) {
+          this.updateActiveStateFromRoute();
+        } else {
+          this.active = false;
+        }
+      });
+
     this.item = {
-      title: ""
+      title: "",
+      routerLink: ""
     };
   }
 
@@ -72,10 +88,10 @@ export class MenuitemComponent implements OnInit, OnDestroy {
   }
 
  async updateActiveStateFromRoute() {
-    let activeRoute = await this.router.navigate(this.item.routerLink ? [], { paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' });
+    let activeRoute = this.router.isActive(this.item.routerLink, true)
 
     if (activeRoute) {
-      this.menuService.onMenuStateChange({ key: this.key, routeEvent: true });
+      this.menuService.onMenuStateChanged({ key: this.key, routeEvent: true });
     }
   }
 

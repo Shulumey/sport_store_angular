@@ -21,15 +21,17 @@ export class MenuService {
       {
         title: "Карточки товаров",
         icon: PrimeIcons.ID_CARD,
-        routerLink: 'r/productcards'
+        routerLink: 'productCards'
       },
       {
         title: "Линии упаковывания",
-        icon: PrimeIcons.BOX
+        icon: PrimeIcons.BOX,
+        routerLink: "packLines"
       },
       {
         title: "Заказы на КМ",
-        icon: PrimeIcons.BRIEFCASE
+        icon: PrimeIcons.BRIEFCASE,
+        routerLink: "orders"
       },
       {
         title: "Реестр КМ",
@@ -38,15 +40,19 @@ export class MenuService {
           {
             title: "Полученные КМ",
             icon: PrimeIcons.INBOX,
+            routerLink: "cises/received"
           },
           {
             title: "Отпечатанные КМ",
             icon: PrimeIcons.PRINT,
+            routerLink: "cises/printed"
           },
           {
             title: "Продукция с КМ",
+            routerLink: "cises/produced"
           }
-        ]
+        ],
+        routerLink: "cices"
       }
     ];
 

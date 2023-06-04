@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {DynamicDialogRef} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public ref: DynamicDialogRef) {
+
+  }
 
   ngOnInit(): void {
+  }
+
+  onSave(){
+
+  }
+
+  onClose(){
+    this.ref.close();
   }
 
 }

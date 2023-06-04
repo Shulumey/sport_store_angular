@@ -13,6 +13,11 @@ import {MenuitemComponent} from "./components/menuitem/menuitem.component";
 import {MenuComponent} from "./components/menu/menu.component";
 import {RippleModule} from "primeng/ripple";
 import {AppRoutes} from "../routes";
+import {ButtonModule} from "primeng/button";
+import {TabViewModule} from "primeng/tabview";
+import {NgIconComponent, NgIconsModule} from "@ng-icons/core";
+import {matSettings} from "@ng-icons/material-icons/baseline";
+
 @NgModule({
   declarations: [
     AppLayoutComponent,
@@ -26,11 +31,19 @@ import {AppRoutes} from "../routes";
     BrowserAnimationsModule,
     NgClass,
     RippleModule,
-    RouterModule.forRoot(AppRoutes)
+    RouterModule.forRoot(AppRoutes, {
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload'
+    }),
+    ButtonModule,
+    TabViewModule,
+    NgIconComponent,
+    NgIconsModule.withIcons({ matSettings })
   ],
   providers:[MenuService, LayoutService],
   exports: [
-    AppLayoutComponent
+    AppLayoutComponent, RouterModule
   ],
   bootstrap: [AppLayoutComponent]
 })
