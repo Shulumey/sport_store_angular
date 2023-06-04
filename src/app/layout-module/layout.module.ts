@@ -15,6 +15,8 @@ import {RippleModule} from "primeng/ripple";
 import {AppRoutes} from "../routes";
 import {ButtonModule} from "primeng/button";
 import {TabViewModule} from "primeng/tabview";
+import {NgIconComponent, NgIconsModule} from "@ng-icons/core";
+import {matSettings} from "@ng-icons/material-icons/baseline";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import {TabViewModule} from "primeng/tabview";
     }),
     ButtonModule,
     TabViewModule,
+    NgIconComponent,
+    NgIconsModule.withIcons({ matSettings }),
   ],
   providers:[MenuService, LayoutService],
   exports: [

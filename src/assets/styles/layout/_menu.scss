@@ -41,7 +41,7 @@
     }
 
     &.active-menuitem {
-      color: var(--primary-color);
+      font-weight: 700;
       @include focused-inset();
     }
 
@@ -59,7 +59,7 @@
     user-select: none;
 
     &.active-menuitem {
-      color: var(--primary-color);
+      font-weight: 700;
       @include focused-inset();
 
       > .layout-submenu-toggler {
@@ -71,7 +71,7 @@
   li.active-menuitem {
 
     > a {
-      color: var(--primary-color);
+      font-weight: 700;
       @include focused-inset();
 
       .layout-submenu-toggler {
