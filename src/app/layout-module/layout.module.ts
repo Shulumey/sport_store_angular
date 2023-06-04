@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {NgClass} from '@angular/common';
-import {RouterLinkWithHref, RouterModule} from "@angular/router";
+import {RouterLink, RouterModule} from "@angular/router";
 import {DynamicDialogModule} from "primeng/dynamicdialog";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
@@ -15,8 +15,6 @@ import {RippleModule} from "primeng/ripple";
 import {AppRoutes} from "../routes";
 import {ButtonModule} from "primeng/button";
 import {TabViewModule} from "primeng/tabview";
-import {NgIconComponent, NgIconsModule} from "@ng-icons/core";
-import {matSettings} from "@ng-icons/material-icons/baseline";
 
 @NgModule({
   declarations: [
@@ -26,7 +24,7 @@ import {matSettings} from "@ng-icons/material-icons/baseline";
     MenuitemComponent,
     MenuComponent],
   imports: [
-    RouterLinkWithHref,
+    RouterLink,
     DynamicDialogModule,
     BrowserAnimationsModule,
     NgClass,
@@ -38,8 +36,6 @@ import {matSettings} from "@ng-icons/material-icons/baseline";
     }),
     ButtonModule,
     TabViewModule,
-    NgIconComponent,
-    NgIconsModule.withIcons({ matSettings })
   ],
   providers:[MenuService, LayoutService],
   exports: [
