@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {AppComponent} from "./components/app/app.component";
 import {LayoutModule} from "./layout-module/layout.module";
 import {ReferencesModule} from "./references-module/references.module";
+import {LoginModule} from "./login-module/login.module";
 
 
 
@@ -11,7 +12,8 @@ import {ReferencesModule} from "./references-module/references.module";
   imports: [
     BrowserModule,
     LayoutModule,
-    ReferencesModule
+    ReferencesModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
